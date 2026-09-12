@@ -24,10 +24,24 @@ public class MovieRecController {
     public List<Movie> getRec(){
         return movies;
     }
+
+
     @PostMapping
     public Movie createMovie(@RequestBody Movie movie){
         movies.add(movie);
         return movie;
+    }
+    @PatchMapping
+    public String updateMovie(@RequestParam String title, @RequestParam String description ){
+        for(int i=0; i< movies.size();i++){
+            Movie movie=movies.get(i);
+            if (movie.title().equals(title)){
+                movies.set(i, new Movie(movie.title(), movie.genre(),movie.year(), description));
+                return movie.title()+" was updated ";
+            }
+
+        }
+        return "no movie was found";
     }
     @DeleteMapping
     public String deleteMovie(@RequestParam int year ){
