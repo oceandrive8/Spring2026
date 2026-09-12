@@ -9,7 +9,7 @@ import java.util.List;
 @RequestMapping("/api/movie")
 public class MovieRecController {
 
-    private List<Movie> movies=new ArrayList<>(
+    private final List<Movie> movies=new ArrayList<>(
             List.of(
                     new Movie(
                             "Howl's Moving Castle",
