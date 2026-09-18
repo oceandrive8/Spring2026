@@ -1,4 +1,4 @@
-package com.example.practice1;
+package com.example.practice1.record;
 
 public record Movie(
         String title,
