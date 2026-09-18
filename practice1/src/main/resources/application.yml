@@ -1,9 +1,0 @@
-spring:
-  application:
-    name: practice1
-
-movie:
-  app:
-    name: Movie API
-    max-movies: 100
-    welcome-message: "Welcome to Movie API"

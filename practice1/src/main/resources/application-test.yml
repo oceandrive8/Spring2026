@@ -1,5 +1,0 @@
-movie:
-  app:
-    name: Movie API Test
-    max-movies: 10
-    welcome-message: "Welcome to Movie API Test"
