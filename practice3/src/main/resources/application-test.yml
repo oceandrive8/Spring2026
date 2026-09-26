@@ -3,3 +3,6 @@ movie:
     name: Movie API Test
     max-movies: 10
     welcome-message: Welcome to the Movie API Test environment!
+
+practice3:
+  enabled: false

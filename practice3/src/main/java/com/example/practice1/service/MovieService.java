@@ -1,5 +1,6 @@
 package com.example.practice1.service;
 
+import com.example.practice1.config.MovieProperties;
 import com.example.practice1.record.Movie;
 import org.springframework.stereotype.Service;
 
@@ -8,6 +9,8 @@ import java.util.List;
 
 @Service
 public class MovieService {
+
+    private final MovieProperties movieProperties;
 
     private final List<Movie> movies = new ArrayList<>(
             List.of(
@@ -19,6 +22,10 @@ public class MovieService {
                     )
             )
     );
+
+    public MovieService(MovieProperties movieProperties) {
+        this.movieProperties = movieProperties;
+    }
 
     public List<Movie> getMovies() {
         return movies;

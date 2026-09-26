@@ -3,3 +3,6 @@ movie:
     name: Movie API
     max-movies: 100
     welcome-message: Welcome to the Movie API!
+
+practice3:
+  enabled: true
