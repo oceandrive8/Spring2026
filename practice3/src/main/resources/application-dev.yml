@@ -1,0 +1,5 @@
+movie:
+  app:
+    name: Movie API Development
+    max-movies: 200
+    welcome-message: Welcome to the Movie API Development environment!

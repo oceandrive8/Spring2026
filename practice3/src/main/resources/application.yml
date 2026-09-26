@@ -1,0 +1,5 @@
+movie:
+  app:
+    name: Movie API
+    max-movies: 100
+    welcome-message: Welcome to the Movie API!
