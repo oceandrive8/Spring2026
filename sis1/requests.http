@@ -1,0 +1,93 @@
+### Get all movies
+GET http://localhost:8080/api/movie
+Accept: application/json
+
+
+### Get movie by ID - success
+GET http://localhost:8080/api/movie/1
+Accept: application/json
+
+
+### Get movie by ID - not found
+GET http://localhost:8080/api/movie/999
+Accept: application/json
+
+
+### Create movie - success
+POST http://localhost:8080/api/movie
+Content-Type: application/json
+
+{
+  "title": "Spirited Away",
+  "genre": "Fantasy",
+  "year": 2001,
+  "description": "A young girl enters a mysterious spirit world."
+}
+
+
+### Create movie - validation error
+POST http://localhost:8080/api/movie
+Content-Type: application/json
+
+{
+  "title": "",
+  "genre": "",
+  "year": 1000,
+  "description": ""
+}
+
+
+### Create movie - conflict
+POST http://localhost:8080/api/movie
+Content-Type: application/json
+
+{
+  "title": "Spirited Away",
+  "genre": "Fantasy",
+  "year": 2001,
+  "description": "A young girl enters a mysterious spirit world."
+}
+
+
+### Update movie - success
+PUT http://localhost:8080/api/movie/1
+Content-Type: application/json
+
+{
+  "title": "Howl's Moving Castle",
+  "genre": "Fantasy",
+  "year": 2004,
+  "description": "Updated description."
+}
+
+
+### Update movie - not found
+PUT http://localhost:8080/api/movie/999
+Content-Type: application/json
+
+{
+  "title": "Unknown Movie",
+  "genre": "Drama",
+  "year": 2020,
+  "description": "This movie does not exist."
+}
+
+
+### Update movie - validation error
+PUT http://localhost:8080/api/movie/1
+Content-Type: application/json
+
+{
+  "title": "",
+  "genre": "",
+  "year": 1000,
+  "description": ""
+}
+
+
+### Delete movie - success
+DELETE http://localhost:8080/api/movie/1
+
+
+### Delete movie - not found
+DELETE http://localhost:8080/api/movie/999
