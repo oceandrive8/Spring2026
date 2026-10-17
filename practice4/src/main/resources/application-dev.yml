@@ -6,3 +6,9 @@ movie:
 
 practice3:
   enabled: true
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/practice4_dev
+    username: postgres
+    password: ${DB_PASSWORD}
