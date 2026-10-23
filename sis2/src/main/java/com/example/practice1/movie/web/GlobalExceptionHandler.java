@@ -2,11 +2,10 @@ package com.example.practice1.movie.web;
 
 import com.example.practice1.movie.domain.MovieConflictException;
 import com.example.practice1.movie.domain.MovieNotFoundException;
-import org.springframework.data.core.PropertyReferenceException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.time.LocalDateTime;
@@ -16,59 +15,33 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse handleValidationException(
-            MethodArgumentNotValidException exception
-    ) {
-        Map<String, String> errors = new LinkedHashMap<>();
-
-        exception.getBindingResult()
-                .getFieldErrors()
-                .forEach(error ->
-                        errors.put(error.getField(), error.getDefaultMessage())
-                );
-
-        return new ErrorResponse(
-                HttpStatus.BAD_REQUEST.value(),
-                "Validation failed",
-                LocalDateTime.now(),
-                errors
-        );
-    }
-
     @ExceptionHandler(MovieNotFoundException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorResponse handleMovieNotFoundException(
-            MovieNotFoundException exception
-    ) {
-        return new ErrorResponse(
-                HttpStatus.NOT_FOUND.value(),
-                exception.getMessage(),
-                LocalDateTime.now(),
-                Map.of()
-        );
+    public ResponseEntity<ErrorResponse> handleNotFound(MovieNotFoundException ex) {
+        return build(HttpStatus.NOT_FOUND, ex.getMessage(), null);
     }
+
     @ExceptionHandler(MovieConflictException.class)
-    @ResponseStatus(HttpStatus.CONFLICT)
-    public ErrorResponse handleMovieConflictException(
-            MovieConflictException exception
-    ) {
-        return new ErrorResponse(
-                HttpStatus.CONFLICT.value(),
-                exception.getMessage(),
-                LocalDateTime.now(),
-                Map.of()
-        );
+    public ResponseEntity<ErrorResponse> handleConflict(MovieConflictException ex) {
+        return build(HttpStatus.CONFLICT, ex.getMessage(), null);
     }
-    @ExceptionHandler(PropertyReferenceException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse handleInvalidSort(PropertyReferenceException exception) {
-        return new ErrorResponse(
-                HttpStatus.BAD_REQUEST.value(),
-                "Invalid sort property: " + exception.getPropertyName(),
-                LocalDateTime.now(),
-                Map.of()
-        );
+
+    // Domain rule violations, e.g. blank title or invalid release year
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ErrorResponse> handleDomainRule(IllegalArgumentException ex) {
+        return build(HttpStatus.UNPROCESSABLE_ENTITY, ex.getMessage(), null);
+    }
+
+    // Bean Validation errors from @Valid request bodies
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorResponse> handleValidation(MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new LinkedHashMap<>();
+        ex.getBindingResult().getFieldErrors()
+                .forEach(e -> errors.putIfAbsent(e.getField(), e.getDefaultMessage()));
+        return build(HttpStatus.BAD_REQUEST, "Validation failed", errors);
+    }
+
+    private ResponseEntity<ErrorResponse> build(HttpStatus status, String message, Map<String, String> errors) {
+        return ResponseEntity.status(status)
+                .body(new ErrorResponse(status.value(), message, LocalDateTime.now(), errors));
     }
 }

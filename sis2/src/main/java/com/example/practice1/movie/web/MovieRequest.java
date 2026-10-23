@@ -14,6 +14,10 @@ public record MovieRequest(
         int year,
 
         @NotBlank(message = "Description is required")
-        String description
+        String description,
+
+        // optional: if directorName is blank, the movie is saved without a director
+        String directorName,
+        String directorCountry
 ) {
 }
