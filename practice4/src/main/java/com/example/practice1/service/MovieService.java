@@ -3,6 +3,7 @@ package com.example.practice1.service;
 import com.example.practice1.config.MovieProperties;
 import com.example.practice1.record.Movie;
 import org.springframework.stereotype.Service;
+import com.example.practice1.exception.MovieConflictException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ public class MovieService {
     private final List<Movie> movies = new ArrayList<>(
             List.of(
                     new Movie(
+                            1,
                             "Howl's Moving Castle",
                             "Fantasy",
                             2004,
@@ -31,9 +33,40 @@ public class MovieService {
         return movies;
     }
 
+    public Movie getMovieById(int id) {
+        return movies.stream()
+                .filter(movie -> movie.id() == id)
+                .findFirst()
+                .orElse(null);
+    }
+
     public Movie createMovie(Movie movie) {
-        movies.add(movie);
-        return movie;
+        boolean titleExists = movies.stream()
+                .anyMatch(existingMovie ->
+                        existingMovie.title().equalsIgnoreCase(movie.title())
+                );
+
+        if (titleExists) {
+            throw new MovieConflictException(
+                    "A movie with title '" + movie.title() + "' already exists"
+            );
+        }
+
+        int nextId = movies.stream()
+                .mapToInt(Movie::id)
+                .max()
+                .orElse(0) + 1;
+
+        Movie createdMovie = new Movie(
+                nextId,
+                movie.title(),
+                movie.genre(),
+                movie.year(),
+                movie.description()
+        );
+
+        movies.add(createdMovie);
+        return createdMovie;
     }
 
     public String updateMovie(String title, String description) {
@@ -44,6 +77,7 @@ public class MovieService {
                 movies.set(
                         i,
                         new Movie(
+                                movie.id(),
                                 movie.title(),
                                 movie.genre(),
                                 movie.year(),
@@ -58,14 +92,33 @@ public class MovieService {
         return "no movie was found";
     }
 
-    public String deleteMovie(int year) {
-        for (Movie movie : movies) {
-            if (movie.year() == year) {
-                movies.remove(movie);
-                return movie.title() + " was deleted cause it was filmed in " + year;
+    public Movie updateMovie(int id, Movie movie) {
+        for (int i = 0; i < movies.size(); i++) {
+            if (movies.get(i).id() == id) {
+                Movie updatedMovie = new Movie(
+                        id,
+                        movie.title(),
+                        movie.genre(),
+                        movie.year(),
+                        movie.description()
+                );
+
+                movies.set(i, updatedMovie);
+                return updatedMovie;
             }
         }
 
-        return "No movie was filmed in " + year;
+        return null;
+    }
+
+    public boolean deleteMovie(int id) {
+        for (int i = 0; i < movies.size(); i++) {
+            if (movies.get(i).id() == id) {
+                movies.remove(i);
+                return true;
+            }
+        }
+
+        return false;
     }
 }

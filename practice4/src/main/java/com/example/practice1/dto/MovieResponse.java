@@ -2,12 +2,20 @@ package com.example.practice1.dto;
 
 import com.example.practice1.entity.MovieEntity;
 
-public record MovieResponse(Long id, String title, String genre,
-                            Integer releaseYear, String directorName) {
-
-    public static MovieResponse from(MovieEntity m) {
+public record MovieResponse(
+        int id,
+        String title,
+        String genre,
+        int year,
+        String description
+) {
+    public static MovieResponse from(MovieEntity movie) {
         return new MovieResponse(
-                m.getId(), m.getTitle(), m.getGenre(), m.getReleaseYear(),
-                m.getDirector() != null ? m.getDirector().getName() : null);
+                movie.getId().intValue(),
+                movie.getTitle(),
+                movie.getGenre(),
+                movie.getReleaseYear(),
+                movie.getDescription()
+        );
     }
 }

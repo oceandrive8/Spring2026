@@ -36,13 +36,13 @@ public class MovieCatalogService {
     }
 
     @Transactional
-    public MovieResponse create(String title, String genre, Integer year,
+    public MovieResponse create(String title, String genre, Integer year, String description,
                                 String directorName, String directorCountry) {
         DirectorEntity director = directorRepository.findByNameIgnoreCase(directorName)
                 .orElseGet(() -> directorRepository.save(
                         new DirectorEntity(directorName, directorCountry)));
         MovieEntity saved = movieRepository.save(
-                new MovieEntity(title, genre, year, director));
+                new MovieEntity(title, genre, year, description, director));
         return MovieResponse.from(saved);
     }
 }

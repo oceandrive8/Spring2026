@@ -2,6 +2,7 @@ package com.example.practice1.controller;
 
 import com.example.practice1.dto.MovieResponse;
 import com.example.practice1.service.MovieCatalogService;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -22,19 +23,20 @@ public class MovieCatalogController {
     public Page<MovieResponse> list(
             @RequestParam(required = false) String genre,
             @RequestParam(required = false) String director,
-            @PageableDefault(size = 20, sort = "id") Pageable pageable) {
+            @ParameterObject @PageableDefault(size = 20, sort = "id") Pageable pageable) {
         if (genre != null) return service.listByGenre(genre, pageable);
         if (director != null) return service.listByDirector(director, pageable);
         return service.list(pageable);
     }
 
     public record CreateMovieRequest(String title, String genre, Integer releaseYear,
+                                     String description,
                                      String directorName, String directorCountry) {}
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public MovieResponse create(@RequestBody CreateMovieRequest r) {
-        return service.create(r.title(), r.genre(), r.releaseYear(),
+        return service.create(r.title(), r.genre(), r.releaseYear(), r.description(),
                 r.directorName(), r.directorCountry());
     }
 }
