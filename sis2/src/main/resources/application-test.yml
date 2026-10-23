@@ -1,0 +1,14 @@
+movie:
+  app:
+    name: Movie API Test
+    max-movies: 10
+    welcome-message: Welcome to the Movie API Test environment!
+
+practice3:
+  enabled: false
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/practice4_test
+    username: postgres
+    password: ${DB_PASSWORD}
