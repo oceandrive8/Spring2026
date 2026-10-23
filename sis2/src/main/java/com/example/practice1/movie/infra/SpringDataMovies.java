@@ -1,13 +1,12 @@
-package com.example.practice1.repository;
+package com.example.practice1.movie.infra;
 
-import com.example.practice1.entity.MovieEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-public interface MovieRepository extends JpaRepository<MovieEntity, Long> {
+public interface SpringDataMovies extends JpaRepository<MovieEntity, Long> {
 
     // derived query
     Page<MovieEntity> findByGenreIgnoreCase(String genre, Pageable pageable);

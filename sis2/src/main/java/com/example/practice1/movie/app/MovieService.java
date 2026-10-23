@@ -1,9 +1,9 @@
-package com.example.practice1.service;
+package com.example.practice1.movie.app;
 
 import com.example.practice1.config.MovieProperties;
-import com.example.practice1.record.Movie;
+import com.example.practice1.movie.domain.Movie;
 import org.springframework.stereotype.Service;
-import com.example.practice1.exception.MovieConflictException;
+import com.example.practice1.movie.domain.MovieConflictException;
 
 import java.util.ArrayList;
 import java.util.List;

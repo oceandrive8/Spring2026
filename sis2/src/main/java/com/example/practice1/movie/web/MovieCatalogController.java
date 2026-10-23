@@ -1,7 +1,6 @@
-package com.example.practice1.controller;
+package com.example.practice1.movie.web;
 
-import com.example.practice1.dto.MovieResponse;
-import com.example.practice1.service.MovieCatalogService;
+import com.example.practice1.movie.app.MovieCatalogService;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

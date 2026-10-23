@@ -1,6 +1,5 @@
-package com.example.practice1.controller;
+package com.example.practice1.config;
 
-import com.example.practice1.config.MovieProperties;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

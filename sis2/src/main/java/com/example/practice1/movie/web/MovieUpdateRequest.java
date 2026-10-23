@@ -1,9 +1,9 @@
-package com.example.practice1.dto;
+package com.example.practice1.movie.web;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
-public record MovieRequest(
+public record MovieUpdateRequest(
         @NotBlank(message = "Title is required")
         String title,
 

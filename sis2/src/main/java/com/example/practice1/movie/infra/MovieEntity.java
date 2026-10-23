@@ -1,4 +1,4 @@
-package com.example.practice1.entity;
+package com.example.practice1.movie.infra;
 
 import jakarta.persistence.*;
 

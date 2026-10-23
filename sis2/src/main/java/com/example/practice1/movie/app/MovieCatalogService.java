@@ -1,10 +1,10 @@
-package com.example.practice1.service;
+package com.example.practice1.movie.app;
 
-import com.example.practice1.dto.MovieResponse;
-import com.example.practice1.entity.DirectorEntity;
-import com.example.practice1.entity.MovieEntity;
-import com.example.practice1.repository.DirectorRepository;
-import com.example.practice1.repository.MovieRepository;
+import com.example.practice1.movie.web.MovieResponse;
+import com.example.practice1.movie.infra.DirectorEntity;
+import com.example.practice1.movie.infra.MovieEntity;
+import com.example.practice1.movie.infra.SpringDataDirectors;
+import com.example.practice1.movie.infra.SpringDataMovies;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -14,11 +14,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class MovieCatalogService {
 
-    private final MovieRepository movieRepository;
-    private final DirectorRepository directorRepository;
+    private final SpringDataMovies movieRepository;
+    private final SpringDataDirectors directorRepository;
 
-    public MovieCatalogService(MovieRepository movieRepository,
-                               DirectorRepository directorRepository) {
+    public MovieCatalogService(SpringDataMovies movieRepository,
+                               SpringDataDirectors directorRepository) {
         this.movieRepository = movieRepository;
         this.directorRepository = directorRepository;
     }

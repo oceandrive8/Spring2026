@@ -1,6 +1,6 @@
 package com.example.practice1.config;
 
-import com.example.practice1.service.MovieService;
+import com.example.practice1.movie.app.MovieService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;

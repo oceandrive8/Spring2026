@@ -1,6 +1,6 @@
-package com.example.practice1.dto;
+package com.example.practice1.movie.web;
 
-import com.example.practice1.entity.MovieEntity;
+import com.example.practice1.movie.infra.MovieEntity;
 
 public record MovieResponse(
         int id,

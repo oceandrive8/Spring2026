@@ -1,5 +1,7 @@
-package com.example.practice1.exception;
+package com.example.practice1.movie.web;
 
+import com.example.practice1.movie.domain.MovieConflictException;
+import com.example.practice1.movie.domain.MovieNotFoundException;
 import org.springframework.data.core.PropertyReferenceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;

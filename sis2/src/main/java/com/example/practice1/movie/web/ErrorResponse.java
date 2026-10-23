@@ -1,4 +1,4 @@
-package com.example.practice1.exception;
+package com.example.practice1.movie.web;
 
 import java.time.LocalDateTime;
 import java.util.Map;

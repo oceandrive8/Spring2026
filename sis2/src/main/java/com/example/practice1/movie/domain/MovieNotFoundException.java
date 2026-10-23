@@ -1,4 +1,4 @@
-package com.example.practice1.exception;
+package com.example.practice1.movie.domain;
 
 public class MovieNotFoundException extends RuntimeException {
 

@@ -1,14 +1,10 @@
-package com.example.practice1.controller;
+package com.example.practice1.movie.web;
 
-import com.example.practice1.dto.MovieRequest;
-import com.example.practice1.dto.MovieResponse;
-import com.example.practice1.dto.MovieUpdateRequest;
-import com.example.practice1.record.Movie;
-import com.example.practice1.service.MovieService;
+import com.example.practice1.movie.domain.Movie;
+import com.example.practice1.movie.app.MovieService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
-import com.example.practice1.exception.MovieNotFoundException;
-import com.example.practice1.exception.MovieConflictException;
+import com.example.practice1.movie.domain.MovieNotFoundException;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
