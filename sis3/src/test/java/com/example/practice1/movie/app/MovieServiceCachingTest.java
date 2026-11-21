@@ -13,6 +13,7 @@ import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.context.ApplicationEventPublisher;
 
 import java.util.Optional;
 
@@ -42,11 +43,16 @@ class MovieServiceCachingTest {
     @MockitoBean
     MovieQueries queries;
 
+    @MockitoBean
+    ApplicationEventPublisher events;
+
     @Autowired
     MovieService service;
 
     @Autowired
     CacheManager cacheManager;
+
+
 
     @BeforeEach
     void clearCache() {

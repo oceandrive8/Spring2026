@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.context.ApplicationEventPublisher;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,6 +31,9 @@ class MovieServiceTest {
 
     @Mock
     MovieQueries queries;
+
+    @Mock
+    ApplicationEventPublisher events;
 
     @InjectMocks
     MovieService service;
